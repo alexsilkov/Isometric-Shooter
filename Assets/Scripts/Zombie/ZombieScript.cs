@@ -33,9 +33,6 @@ public class ZombieScript : MonoBehaviour
     public void Death()
     {
         manager.WaveCheck();
-        gameObject.tag.Replace("Enemy","Untagged");
-        this.enabled = false;
-        gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        Destroy(gameObject, 2.0f);
+        Destroy(gameObject);
     }
 }

@@ -652,6 +652,7 @@ MonoBehaviour:
   rotationSpeed: 5
   bullet: {fileID: 5451207638855669694, guid: d923e8bac7761df458a738922cb4960c, type: 3}
   shootPoint: {fileID: 524344199}
+  animator: {fileID: 604003682}
 --- !u!54 &604003680
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -682,6 +683,12 @@ CapsuleCollider:
   m_Height: 2.55
   m_Direction: 1
   m_Center: {x: 0, y: 1.28, z: 0}
+--- !u!95 &604003682 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: c6acf3f29c109e4439950c8f6a85cb2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 391741673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &604003683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400052, guid: c6acf3f29c109e4439950c8f6a85cb2b,

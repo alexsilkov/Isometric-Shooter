@@ -9,6 +9,7 @@ public class SoldierScript : MonoBehaviour
     public float rotationSpeed;
     public GameObject bullet;
     public Transform shootPoint;
+    public Animator animator;
 
     private Rigidbody body;
     private Vector3 foRward, rigHt;
@@ -33,10 +34,19 @@ public class SoldierScript : MonoBehaviour
             transform.LookAt(hit.point);
             transform.eulerAngles = new Vector3(rot.x, transform.eulerAngles.y, rot.z);
         }
-        
-        float forward = Input.GetAxis("Vertical");
-        float right = Input.GetAxis("Horizontal");
-        transform.Translate(right * moveSpeed * Time.deltaTime, 0, forward * moveSpeed * Time.deltaTime, Space.Self);
+
+        Vector3 rightMovement = rigHt * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
+        Vector3 upMovement = foRward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
+        if(Input.GetAxis("Horizontal")!=0.0f || Input.GetAxis("Vertical")!=0.0f)
+        {
+            animator.SetBool("MovingOrNot", true);
+        }   
+        else
+        {
+            animator.SetBool("MovingOrNot",false);
+        }    
+        transform.position += rightMovement;
+        transform.position += upMovement;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -47,6 +57,7 @@ public class SoldierScript : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullet,shootPoint.position,shootPoint.rotation);
+       GameObject Bullet =  Instantiate(bullet,shootPoint.position,shootPoint.rotation);
+       Destroy(Bullet,2.0f); 
     }
 }

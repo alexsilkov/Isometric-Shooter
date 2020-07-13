@@ -22,7 +22,7 @@ public class ManagerScript : MonoBehaviour
     void Start()
     {
         currentWaveNumber = 1;
-        StartCoroutine(Spawn(waveEnemyCount));
+        Invoke("SpawnCaller", 2.0f);
         currentEnemyCount = waveEnemyCount;
         waveNumber.text = "Wave " + currentWaveNumber.ToString();
     }
@@ -30,20 +30,26 @@ public class ManagerScript : MonoBehaviour
     public void WaveCheck()
     {
         currentEnemyCount--;
-        if (currentWaveNumber != maxWaveCount && currentEnemyCount==0)
+        if (currentWaveNumber != maxWaveCount && currentEnemyCount == 0)
         {
             currentWaveNumber++;
             waveEnemyCount += 5; //Простая формула, увеличивающая количество зомби
-            StartCoroutine(Spawn(waveEnemyCount));
+            Invoke("SpawnCaller", 2.0f);
             currentEnemyCount = waveEnemyCount;
             waveNumber.text = "Wave " + currentWaveNumber;
         }
-        else if (currentWaveNumber == maxWaveCount && currentEnemyCount==0)
+        else if (currentWaveNumber == maxWaveCount && currentEnemyCount == 0) 
         {
             message.text = "Победа!";
             Time.timeScale = 0f;
             resultCanvas.gameObject.SetActive(true);
         }
+    }
+
+    private void SpawnCaller()
+    {
+        int enemy = waveEnemyCount;
+        StartCoroutine(Spawn(enemy));
     }
 
     IEnumerator Spawn(int enemy)
@@ -52,7 +58,7 @@ public class ManagerScript : MonoBehaviour
         {
             int number = Random.Range(0, spawnPoints.Length);
             Instantiate(enemyPrefab, spawnPoints[number].transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
