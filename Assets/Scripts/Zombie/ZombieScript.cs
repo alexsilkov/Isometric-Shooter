@@ -16,7 +16,6 @@ public class ZombieScript : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<ManagerScript>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         agent.destination = player.position;
